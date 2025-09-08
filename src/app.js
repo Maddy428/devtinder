@@ -77,21 +77,47 @@ const { adminAuth, userAuth } = require("./middlerwares/auth.js")
     // }
     // )
 
-    app.use("/admin",adminAuth);
-    app.get("/admin/getAllData",(req,res)=>{
-            res.send("Getting all admin data");        
+    // app.use("/admin",adminAuth);
+    // app.get("/admin/getAllData",(req,res)=>{
+    //         res.send("Getting all admin data");        
+    // })
+
+    // app.post("/admin/getAllData",(req,res)=>{
+    //         res.send("post admin all data")
+    // })
+
+    // app.get("/user",userAuth,(req,res)=>{
+    //     res.send("User Data is getting ")
+    // })
+    // app.post("/user",(req,res)=>{
+    //     res.send("post Data is getting ")
+    // })
+    // ------ Error Handlers------
+
+        app.use("/",(err,req,res,next)=>{
+        if(err){
+            res.status(500).send("Something went wrong");
+        }
+        
     })
 
-    app.post("/admin/getAllData",(req,res)=>{
-            res.send("post admin all data")
+    app.get("/admin/getData",(req,res)=>{
+        // try{
+
+        throw new Error("qwerty")
+        res.send("admin data is getting");
+        // }catch(err){
+        //     res.status(500).send("catch the error Something went wrong")
+        // }
+
+    })
+    app.use("/",(err,req,res,next)=>{
+        if(err){
+            res.status(500).send("Something went wrong");
+        }
+        
     })
 
-    app.get("/user",userAuth,(req,res)=>{
-        res.send("User Data is getting ")
-    })
-    app.post("/user",(req,res)=>{
-        res.send("post Data is getting ")
-    })
 app.listen(7777, ()=>{
     console.log("port is listening 7777.....")
 })
